@@ -23,13 +23,36 @@ public class ArvoreABB {
         } else if (valor > no.valor) {
             if (no.dir != null) inserir(no.dir, valor);
             else no.dir = new No(valor);
+        } else {
+            System.out.printf("%d já está na árvore, não pode ser inserido", valor);
+            System.out.println();
+            return;
         }
+    }
+
+    public void calcularAltura(No no) {
+        if (no.esq != null) calcularAltura(no.esq);
+        if (no.dir != null) calcularAltura(no.dir);
+        no.calcularAltura(no);
     }
 
     public void preOrdem(No no) {
         System.out.print(no.valor + " ");
         if (no.esq != null) preOrdem(no.esq);
         if (no.dir != null) preOrdem(no.dir);
+    }
+
+    public void imprimeArvore(int s) {
+        if (s == 1) imprimeArvore1();
+        if (s == 2) imprimeArvore2();
+    }
+
+    public void imprimeArvore1() {
+        
+    }
+
+    public void imprimeArvore2() {
+        
     }
 
     /*

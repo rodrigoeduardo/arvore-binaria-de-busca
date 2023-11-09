@@ -30,8 +30,25 @@ public class Main {
 
         ArvoreABB arvore = new ArvoreABB(abbInicialFormatada);
 
-        arvore.preOrdem(arvore.raiz);
-        System.out.println();
+        arvore.calcularAltura(arvore.raiz);
+        System.out.println(arvore.raiz.altura);
+
+        // for (String entrada : entradas) {
+        //     String comando = entrada.split(" ")[0];
+
+        //     executarComando(comando, arvore);
+        // }
+    }
+
+    private static void executarComando(String comando, ArvoreABB arvore) {
+        switch (comando) {
+            case "PREORDEM":
+                arvore.preOrdem(arvore.raiz);
+                break;
+        
+            default:
+                break;
+        }
     }
 
     private static List<String> readFile(String fileName) throws IOException {
