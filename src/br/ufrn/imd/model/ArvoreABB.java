@@ -1,5 +1,6 @@
 package src.br.ufrn.imd.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -97,6 +98,37 @@ public class ArvoreABB {
         return -1;
     }
 
+    // recebe um No e uma lista vazia e preenche a lista de maneira ordenada com os descendentes da raiz
+    private void paraListaOrdenada(No raiz, List<Integer> lista){
+        if (raiz != null){
+            paraListaOrdenada(raiz.esq, lista);
+            lista.add(raiz.valor);
+            paraListaOrdenada(raiz.dir, lista);
+        }
+    }
+
+    public int mediana(){
+        List<Integer> listaOrdenada = new ArrayList<>();
+        this.paraListaOrdenada(this.raiz, listaOrdenada);
+
+        if (listaOrdenada.size() % 2 == 0){
+            return listaOrdenada.get((listaOrdenada.size() / 2) - 1);
+        } else {
+            return listaOrdenada.get(listaOrdenada.size() / 2);
+        }
+    }
+
+    public double media(){
+        List<Integer> listaOrdenada = new ArrayList<>();
+        this.paraListaOrdenada(this.raiz, listaOrdenada);
+
+        int soma = 0;
+        for(int elemento : listaOrdenada){
+            soma += elemento;
+        }
+
+        return ((double) soma) / ((double) listaOrdenada.size());
+    }
 
     /*
 
