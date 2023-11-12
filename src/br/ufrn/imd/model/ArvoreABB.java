@@ -76,6 +76,27 @@ public class ArvoreABB {
         return -1;
     }
 
+    public int posicao(int x){
+        Stack<No> pilha = new Stack<>();
+        No noAtual = this.raiz;
+        int n = 1;
+
+        while(pilha.isEmpty() == false || noAtual != null){
+            if (noAtual != null){
+                pilha.push(noAtual);
+                noAtual = noAtual.esq;
+            } else {
+                noAtual = pilha.pop();
+                if (x == noAtual.valor){
+                    return n;
+                }
+                n += 1;
+                noAtual = noAtual.dir;
+            }
+        }
+        return -1;
+    }
+
 
     /*
 
