@@ -1,6 +1,7 @@
 package src.br.ufrn.imd.model;
 
 import java.util.List;
+import java.util.Stack;
 
 public class ArvoreABB {
     public No raiz;
@@ -54,6 +55,27 @@ public class ArvoreABB {
     public void imprimeArvore2() {
         
     }
+
+    public int enesimoElemento(int n){
+        Stack<No> pilha = new Stack<>();
+        No noAtual = this.raiz;
+
+        while(pilha.isEmpty() == false || noAtual != null){
+            if (noAtual != null){
+                pilha.push(noAtual);
+                noAtual = noAtual.esq;
+            } else {
+                noAtual = pilha.pop();
+                n -= 1;
+                if (n == 0){
+                    return noAtual.valor;
+                }
+                noAtual = noAtual.dir;
+            }
+        }
+        return -1;
+    }
+
 
     /*
 
