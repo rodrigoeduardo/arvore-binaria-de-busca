@@ -127,15 +127,15 @@ public class ArvoreABB {
     }
 
     public void imprimeArvore(int s) {
-        if (s == 1) imprimeArvore1(raiz);
+        if (s == 1) imprimeArvore1(raiz, raiz.altura());
         if (s == 2) imprimeArvore2();
     }
 
-    private void imprimeArvore1(No no) {
-        for (int i = raiz.altura() - no.altura(); i != 0; i--) System.out.print("      ");
+    private void imprimeArvore1(No no, int altura) {
+        for(int i = raiz.altura() - altura; i != 0; i--) System.out.print("    ");
         System.out.println(no.valor + "--------------");
-        if (no.esq != null) imprimeArvore1(no.esq);
-        if (no.dir != null) imprimeArvore1(no.dir);
+        if (no.esq != null) imprimeArvore1(no.esq, altura-1);
+        if (no.dir != null) imprimeArvore1(no.dir, altura-1);
     }
 
     private void imprimeArvore2() {
