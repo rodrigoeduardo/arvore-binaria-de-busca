@@ -6,8 +6,10 @@ import java.util.Stack;
 
 public class ArvoreABB {
     public No raiz;
+    public int qtdNos;
     
     public ArvoreABB(List<Integer> nums) {
+        this.qtdNos = 0;
         for (Integer num : nums) {
             inserir(this.raiz, num);
         }
@@ -16,15 +18,26 @@ public class ArvoreABB {
     public void inserir(No no, int valor) {
         if (this.raiz == null) {
             this.raiz = new No(valor);
+            qtdNos++;
             return;
         }
 
         if (valor < no.valor) {
             if (no.esq != null) inserir(no.esq, valor);
-            else no.esq = new No(valor);
+            else {
+                no.esq = new No(valor);
+                qtdNos++;
+                System.out.printf("%d adicionado", valor);
+                System.out.println();
+            }
         } else if (valor > no.valor) {
             if (no.dir != null) inserir(no.dir, valor);
-            else no.dir = new No(valor);
+            else {
+                no.dir = new No(valor);
+                qtdNos++;
+                System.out.printf("%d adicionado", valor);
+                System.out.println();
+            }
         } else {
             System.out.printf("%d já está na árvore, não pode ser inserido", valor);
             System.out.println();
@@ -38,23 +51,48 @@ public class ArvoreABB {
         no.calcularAltura(no);
     }
 
-    public void preOrdem(No no) {
-        System.out.print(no.valor + " ");
-        if (no.esq != null) preOrdem(no.esq);
-        if (no.dir != null) preOrdem(no.dir);
+    public String preOrdem(No no) {
+        String percurso = "";
+        Stack<No> pilha = new Stack<No>();
+        pilha.push(no);
+
+        while (!pilha.empty()) {
+            No aux = pilha.pop();
+            percurso += aux.valor;
+
+            if (aux.dir != null) pilha.push(aux.dir);
+            if (aux.esq != null) pilha.push(aux.esq);
+
+            if (!pilha.empty()) percurso += " ";
+        }
+
+        return percurso;
     }
 
     public void imprimeArvore(int s) {
-        if (s == 1) imprimeArvore1();
-        if (s == 2) imprimeArvore2();
+        if (s == 1) imprimeArvore1(raiz);
+        if (s == 2) imprimeArvore2(raiz);
     }
 
-    public void imprimeArvore1() {
-        
+    private void imprimeArvore1(No no) {
+        for (int i = raiz.altura - no.altura; i != 0; i--) System.out.print("      ");
+        System.out.println(no.valor + "--------------");
+        if (no.esq != null) imprimeArvore1(no.esq);
+        if (no.dir != null) imprimeArvore1(no.dir);
     }
 
-    public void imprimeArvore2() {
-        
+    private void imprimeArvore2(No no) {
+        // TODO
+    }
+
+    public boolean ehCompleta() {
+        if (qtdNos >= Math.pow(2, raiz.altura - 1) && qtdNos <= Math.pow(2, raiz.altura) - 1) return true;
+        return false;
+    }
+
+    public boolean ehCheia() {
+        if (qtdNos == Math.pow(2, raiz.altura) - 1) return true;
+        return false;
     }
 
     public int enesimoElemento(int n){

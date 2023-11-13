@@ -31,7 +31,12 @@ public class Main {
         ArvoreABB arvore = new ArvoreABB(abbInicialFormatada);
 
         arvore.calcularAltura(arvore.raiz);
-        System.out.println(arvore.raiz.altura);
+
+        arvore.inserir(arvore.raiz, 36);
+
+        System.out.println(arvore.preOrdem(arvore.raiz));
+
+        arvore.imprimeArvore(1);
 
         // for (String entrada : entradas) {
         //     String comando = entrada.split(" ")[0];
