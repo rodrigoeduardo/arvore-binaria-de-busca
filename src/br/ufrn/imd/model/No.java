@@ -4,26 +4,24 @@ public class No {
     int valor;
     No esq;
     No dir;
-    public int altura;
     // int nivel;
 
     public No(int valor) {
         this.valor = valor;
         this.esq = null;
         this.dir = null;
-        this.altura = 1;
     }
 
-    public void calcularAltura(No no) {
+    public int altura() {
         int alturaEsq, alturaDir;
 
-        if (no.esq != null) alturaEsq = no.esq.altura;
+        if (this.esq != null) alturaEsq = this.esq.altura();
         else alturaEsq = 0;
 
-        if (no.dir != null) alturaDir = no.dir.altura;
+        if (this.dir != null) alturaDir = this.dir.altura();
         else alturaDir = 0;
 
-        if (alturaEsq > alturaDir) no.altura = alturaEsq + 1;
-        else no.altura = alturaDir + 1;
+        if (alturaEsq > alturaDir) return alturaEsq + 1;
+        else return alturaDir + 1;
     }
 }
