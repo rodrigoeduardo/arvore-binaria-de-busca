@@ -149,7 +149,7 @@ public class ArvoreABB {
     private void imprimeArvore2() {
         System.out.print("(");
         imprimeArvore2(raiz);
-        System.out.print(")");
+        System.out.print(")\n");
     }
 
     private void imprimeArvore2(No no) {
@@ -189,6 +189,7 @@ public class ArvoreABB {
     }
 
     public int enesimoElemento(int n){
+        int posicaoDesejada = n;
         Stack<No> pilha = new Stack<>();
         No noAtual = this.raiz;
 
@@ -200,13 +201,13 @@ public class ArvoreABB {
                 noAtual = pilha.pop();
                 n -= 1;
                 if (n == 0){
-                    System.out.println(noAtual.valor);
+                    System.out.printf("O %d° elemento em ordem simétrica é %d\n", posicaoDesejada, noAtual.valor);
                     return noAtual.valor;
                 }
                 noAtual = noAtual.dir;
             }
         }
-        System.out.println(-1);
+        System.out.printf("%d está fora do alcance da arvóre\n", n);
         return -1;
     }
 
@@ -222,14 +223,14 @@ public class ArvoreABB {
             } else {
                 noAtual = pilha.pop();
                 if (x == noAtual.valor){
-                    System.out.println(n);
+                    System.out.printf("Elemento %d é o %d° em ordem simétrica\n", x, n);
                     return n;
                 }
                 n += 1;
                 noAtual = noAtual.dir;
             }
         }
-        System.out.println(-1);
+        System.out.printf("Elemento %d não está presente na árvore\n", x);
         return -1;
     }
 
@@ -244,17 +245,17 @@ public class ArvoreABB {
 
     public int mediana(){
         List<Integer> listaOrdenada = new ArrayList<>();
+        int mediana;
         this.paraListaOrdenada(this.raiz, listaOrdenada);
 
         if (listaOrdenada.size() % 2 == 0){
-            int mediana = listaOrdenada.get((listaOrdenada.size() / 2) - 1);
-            System.out.println(mediana);
-            return mediana;
+            mediana = listaOrdenada.get((listaOrdenada.size() / 2) - 1);
         } else {
-            int mediana = listaOrdenada.get(listaOrdenada.size() / 2);
-            System.out.println(mediana);
-            return mediana;
+            mediana = listaOrdenada.get(listaOrdenada.size() / 2);
         }
+
+        System.out.println("Mediana da árvore igual a " + mediana);
+        return mediana;
     }
 
     public double media(){
@@ -267,7 +268,7 @@ public class ArvoreABB {
         }
 
         double media = ((double) soma) / ((double) listaOrdenada.size());
-        System.out.println(media);
+        System.out.println("Media da árvore igual a " + media);
         return media;
     }
 
