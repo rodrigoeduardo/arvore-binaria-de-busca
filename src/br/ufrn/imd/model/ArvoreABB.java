@@ -70,15 +70,14 @@ public class ArvoreABB {
                 no.valor = sucessor(no);
                 no.dir = remover(no.esq, no.valor);
             }
-            return no;
         } else {
             if (x > no.valor){
-                remover(no.dir, x);
+                no.dir = remover(no.dir, x);
             } else if (x < no.valor) {
-                remover(no.esq, x);
+                no.esq = remover(no.esq, x);
             }
-            return no;
         }
+        return no;
     }
 
     public void inserir(No no, int valor) {
@@ -188,8 +187,8 @@ public class ArvoreABB {
         return false;
     }
 
-    public int enesimoElemento(int n){
-        int posicaoDesejada = n;
+    public int enesimoElemento(int posicaoDesejada){
+        int n = posicaoDesejada;
         Stack<No> pilha = new Stack<>();
         No noAtual = this.raiz;
 
