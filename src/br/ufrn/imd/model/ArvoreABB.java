@@ -15,18 +15,18 @@ public class ArvoreABB {
         }
     }
 
-    public void busca(No no,int x){
+    public void buscar(No no,int x){
         if (no == null) {
-            System.out.println("Elemento não está presente na árvore");
+            System.out.printf("Elemento %d não está presente na árvore\n", x);
             return;
         } else if (no.valor == x) {
-            System.out.println("Elemento encontrado");
+            System.out.printf("Elemento %d encontrado\n", x);
             return;
         } else {
             if (x > no.valor){
-                busca(no.dir, x);
+                buscar(no.dir, x);
             } else if (x < no.valor) {
-                busca(no.esq, x);
+                buscar(no.esq, x);
             }
             return;
         }
