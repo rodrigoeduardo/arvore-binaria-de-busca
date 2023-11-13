@@ -30,25 +30,62 @@ public class Main {
 
         ArvoreABB arvore = new ArvoreABB(abbInicialFormatada);
 
-        arvore.calcularAltura(arvore.raiz);
+        System.out.println();
+        System.out.println("OPERAÇÕES DE entrada.txt:");
+        System.out.println();
 
-        arvore.inserir(arvore.raiz, 36);
+        for (String entrada : entradas) {
+            String[] split = entrada.split(" ");
+            String comando = split[0];
+            String argumento = "";
 
-        System.out.println(arvore.preOrdem(arvore.raiz));
+            try {
+                argumento = split[1];
+            } catch (Exception e) {
+                
+            }
 
-        arvore.imprimeArvore(1);
-
-        // for (String entrada : entradas) {
-        //     String comando = entrada.split(" ")[0];
-
-        //     executarComando(comando, arvore);
-        // }
+            executarComando(comando, argumento, arvore);
+        }
     }
 
-    private static void executarComando(String comando, ArvoreABB arvore) {
+    private static void executarComando(String comando, String argumento, ArvoreABB arvore) {
         switch (comando) {
+            case "INSIRA":
+                arvore.inserir(arvore.raiz, Integer.parseInt(argumento));
+                break;
+            case "REMOVA":
+                // TODO
+                System.out.println("REMOÇÃO");
+                break;
+            case "BUSCAR":
+                // TODO
+                System.out.println("BUSCA");
+                break;
+
+            case "ENESIMO":
+                arvore.enesimoElemento(Integer.parseInt(argumento));
+                break;
+            case "POSICAO":
+                arvore.posicao(Integer.parseInt(argumento));
+                break;
+            case "MEDIANA":
+                arvore.mediana();
+                break;
+            case "MEDIA":
+                arvore.media();
+                break;
+            case "CHEIA":
+                arvore.ehCheia();
+                break;
+            case "COMPLETA":
+                arvore.ehCompleta();
+                break;
             case "PREORDEM":
-                arvore.preOrdem(arvore.raiz);
+                arvore.preOrdem();
+                break;
+            case "IMPRIMA":
+                arvore.imprimeArvore(Integer.parseInt(argumento));
                 break;
         
             default:
