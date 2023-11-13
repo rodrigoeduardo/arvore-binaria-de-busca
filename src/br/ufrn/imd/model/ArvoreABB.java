@@ -45,10 +45,8 @@ public class ArvoreABB {
         }
     }
 
-    public void calcularAltura(No no) {
-        if (no.esq != null) calcularAltura(no.esq);
-        if (no.dir != null) calcularAltura(no.dir);
-        no.calcularAltura(no);
+    public String preOrdem() {
+        return preOrdem(raiz);
     }
 
     public String preOrdem(No no) {
@@ -66,32 +64,61 @@ public class ArvoreABB {
             if (!pilha.empty()) percurso += " ";
         }
 
+        System.out.println(percurso);
         return percurso;
     }
 
     public void imprimeArvore(int s) {
         if (s == 1) imprimeArvore1(raiz);
-        if (s == 2) imprimeArvore2(raiz);
+        if (s == 2) imprimeArvore2();
     }
 
     private void imprimeArvore1(No no) {
-        for (int i = raiz.altura - no.altura; i != 0; i--) System.out.print("      ");
+        for (int i = raiz.altura() - no.altura(); i != 0; i--) System.out.print("      ");
         System.out.println(no.valor + "--------------");
         if (no.esq != null) imprimeArvore1(no.esq);
         if (no.dir != null) imprimeArvore1(no.dir);
     }
 
+    private void imprimeArvore2() {
+        System.out.print("(");
+        imprimeArvore2(raiz);
+        System.out.print(")");
+    }
+
     private void imprimeArvore2(No no) {
-        // TODO
+        System.out.print(no.valor);
+
+        if (no.esq != null) {
+            System.out.print("(");
+            imprimeArvore2(no.esq);
+            System.out.print(")");
+        }
+
+        if (no.dir != null) {
+            System.out.print("(");
+            imprimeArvore2(no.dir);
+            System.out.print(")");
+        }
     }
 
     public boolean ehCompleta() {
-        if (qtdNos >= Math.pow(2, raiz.altura - 1) && qtdNos <= Math.pow(2, raiz.altura) - 1) return true;
+        if (qtdNos >= Math.pow(2, raiz.altura() - 1) && qtdNos <= Math.pow(2, raiz.altura()) - 1) {
+            System.out.println("A árvore é completa");
+            return true;
+        }
+
+        System.out.println("A árvore não é completa");
         return false;
     }
 
     public boolean ehCheia() {
-        if (qtdNos == Math.pow(2, raiz.altura) - 1) return true;
+        if (qtdNos == Math.pow(2, raiz.altura()) - 1) {
+            System.out.println("A árvore é cheia");
+            return true;
+        }
+        
+        System.out.println("A árvore não é cheia");
         return false;
     }
 
@@ -107,11 +134,13 @@ public class ArvoreABB {
                 noAtual = pilha.pop();
                 n -= 1;
                 if (n == 0){
+                    System.out.println(noAtual.valor);
                     return noAtual.valor;
                 }
                 noAtual = noAtual.dir;
             }
         }
+        System.out.println(-1);
         return -1;
     }
 
@@ -127,12 +156,14 @@ public class ArvoreABB {
             } else {
                 noAtual = pilha.pop();
                 if (x == noAtual.valor){
+                    System.out.println(n);
                     return n;
                 }
                 n += 1;
                 noAtual = noAtual.dir;
             }
         }
+        System.out.println(-1);
         return -1;
     }
 
@@ -150,9 +181,13 @@ public class ArvoreABB {
         this.paraListaOrdenada(this.raiz, listaOrdenada);
 
         if (listaOrdenada.size() % 2 == 0){
-            return listaOrdenada.get((listaOrdenada.size() / 2) - 1);
+            int mediana = listaOrdenada.get((listaOrdenada.size() / 2) - 1);
+            System.out.println(mediana);
+            return mediana;
         } else {
-            return listaOrdenada.get(listaOrdenada.size() / 2);
+            int mediana = listaOrdenada.get(listaOrdenada.size() / 2);
+            System.out.println(mediana);
+            return mediana;
         }
     }
 
@@ -165,7 +200,9 @@ public class ArvoreABB {
             soma += elemento;
         }
 
-        return ((double) soma) / ((double) listaOrdenada.size());
+        double media = ((double) soma) / ((double) listaOrdenada.size());
+        System.out.println(media);
+        return media;
     }
 
     /*
