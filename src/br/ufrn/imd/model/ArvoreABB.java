@@ -15,60 +15,53 @@ public class ArvoreABB {
         }
     }
 
-    public void buscar(No no, int x){
+    public No buscar(No no, int x){
         if (no == null) {
             System.out.printf("Elemento %d não está presente na árvore\n", x);
-            return;
-        } else if (no.valor == x) {
-            System.out.printf("Elemento %d encontrado\n", x);
-            return;
+            return null;
+        }
+
+        if (x > no.valor){
+            return buscar(no.dir, x);
+        } else if (x < no.valor) {
+            return buscar(no.esq, x);
         } else {
-            if (x > no.valor){
-                buscar(no.dir, x);
-            } else if (x < no.valor) {
-                buscar(no.esq, x);
-            }
-            return;
+            System.out.printf("Elemento %d encontrado\n", x);
+            return no;
         }
-    }
-
-    private int sucessor(No no){
-        no = no.dir;
-        while(no.esq != null){
-            no = no.esq;
-        }
-        return no.valor;
-    }
-
-    private int predecessor(No no){
-        no = no.esq;
-        while(no.dir != null){
-            no = no.dir;
-        }
-        return no.valor;
     }
 
     public void remover(int x){
-        No result = remover(this.raiz, x);
-        if (result == null){
-            System.out.printf("Elemento %d não está presente na árvore\n", x);
-        } else { 
-            System.out.printf("Elemento %d removido da árvore\n", x);
-        }
+        if (buscar(raiz, x) == null) return;
+        remover(this.raiz, x);
+        System.out.printf("Elemento %d removido da árvore\n", x);
     }
 
     public No remover(No no, int x){
         if (no == null) {
             return no;
-        } else if (no.valor == x) {
-            if (no.esq == null && no.dir == null){
-                no = null;
-            } else if (no.esq != null && no.dir == null) {
-                no.valor = predecessor(no);
-                no.esq = remover(no.dir, no.valor);
+        }
+        
+        if (no.valor == x) {
+            if (no.esq == null){
+                return no.dir;
+            } else if (no.dir == null) {
+                return no.esq;
             } else {
-                no.valor = sucessor(no);
-                no.dir = remover(no.esq, no.valor);
+                No paiSucessor = no;
+                No sucessor = no.dir;
+
+                while (sucessor.esq != null) {
+                    paiSucessor = sucessor;
+                    sucessor = sucessor.esq;
+                }
+
+                if (paiSucessor != no) paiSucessor.esq = sucessor.dir;
+                else paiSucessor.dir = sucessor.dir;
+
+                no.valor = sucessor.valor;
+
+                return no;
             }
         } else {
             if (x > no.valor){
@@ -76,8 +69,8 @@ public class ArvoreABB {
             } else if (x < no.valor) {
                 no.esq = remover(no.esq, x);
             }
+            return no;
         }
-        return no;
     }
 
     public void inserir(No no, int valor) {
