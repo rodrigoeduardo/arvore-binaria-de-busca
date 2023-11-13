@@ -53,7 +53,7 @@ public class ArvoreABB {
         if (result == null){
             System.out.printf("Elemento %d não está presente na árvore\n", x);
         } else { 
-            System.out.printf("Elemento %d removido da arvóre\n", x);
+            System.out.printf("Elemento %d removido da árvore\n", x);
         }
     }
 
@@ -206,7 +206,7 @@ public class ArvoreABB {
                 noAtual = noAtual.dir;
             }
         }
-        System.out.printf("%d está fora do alcance da arvóre\n", n);
+        System.out.printf("%d está fora do alcance da árvore\n", n);
         return -1;
     }
 
