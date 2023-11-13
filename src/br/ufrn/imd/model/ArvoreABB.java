@@ -15,6 +15,23 @@ public class ArvoreABB {
         }
     }
 
+    public void busca(No no,int x){
+        if (no == null) {
+            System.out.println("Elemento não está presente na árvore");
+            return;
+        } else if (no.valor == x) {
+            System.out.println("Elemento encontrado");
+            return;
+        } else {
+            if (x > no.valor){
+                busca(no.dir, x);
+            } else if (x < no.valor) {
+                busca(no.esq, x);
+            }
+            return;
+        }
+    }
+
     public void inserir(No no, int valor) {
         if (this.raiz == null) {
             this.raiz = new No(valor);
