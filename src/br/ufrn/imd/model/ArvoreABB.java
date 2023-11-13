@@ -260,7 +260,7 @@ public class ArvoreABB {
         }
 
         double media = ((double) soma) / ((double) listaOrdenada.size());
-        System.out.println("Media da árvore igual a " + media);
+        System.out.println("Média da árvore igual a " + media);
         return media;
     }
 
