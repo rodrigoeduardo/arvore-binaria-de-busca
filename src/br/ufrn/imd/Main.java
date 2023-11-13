@@ -55,14 +55,11 @@ public class Main {
                 arvore.inserir(arvore.raiz, Integer.parseInt(argumento));
                 break;
             case "REMOVA":
-                // TODO
-                System.out.println("REMOÇÃO");
+                arvore.remover(Integer.parseInt(argumento));
                 break;
             case "BUSCAR":
-                // TODO
-                System.out.println("BUSCA");
+                arvore.buscar(arvore.raiz, Integer.parseInt(argumento));
                 break;
-
             case "ENESIMO":
                 arvore.enesimoElemento(Integer.parseInt(argumento));
                 break;
